@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>CRM PRO املاک چمستان</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}
+header{background:#111827;color:white;padding:18px 16px;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #0002}
+header h1{margin:0;font-size:20px}header p{margin:5px 0 0;color:#cbd5e1;font-size:12px}
+nav{display:flex;gap:7px;overflow:auto;padding:10px;background:white;position:sticky;top:77px;z-index:4;border-bottom:1px solid #e5e7eb}
+nav button{white-space:nowrap;border:0;border-radius:10px;padding:10px 13px;background:#eef2ff;color:#3730a3;font-weight:700}
+nav button.active{background:#111827;color:white}
+main{padding:14px;max-width:1100px;margin:auto}.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.card{background:white;border-radius:15px;padding:14px;box-shadow:0 2px 8px #0000000b;margin-bottom:10px}
+.stat{font-size:22px;font-weight:800}.muted{color:#64748b;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+label{display:block;font-size:12px;color:#475569;margin-bottom:5px}input,select,textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:10px;background:white;font:inherit}textarea{min-height:90px;resize:vertical}
+.full{grid-column:1/-1}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:800;cursor:pointer}.primary{background:#111827;color:white}.green{background:#dcfce7;color:#166534}.blue{background:#dbeafe;color:#1d4ed8}.red{background:#fee2e2;color:#991b1b}.gray{background:#e5e7eb;color:#374151}
+.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.tag{display:inline-block;padding:4px 8px;border-radius:99px;background:#eef2ff;color:#3730a3;font-size:11px;margin:2px}
+.item{border:1px solid #e5e7eb;border-radius:13px;padding:12px;margin-top:9px;background:#fff}.item h3{margin:0 0 7px;font-size:16px}.price{font-weight:900;font-size:17px}
+.photos{display:flex;gap:6px;overflow:auto;margin-top:8px}.photos img{width:90px;height:70px;object-fit:cover;border-radius:9px}
+.empty{text-align:center;padding:28px;color:#64748b}.notice{padding:11px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px}
+hr{border:0;border-top:1px solid #e5e7eb;margin:14px 0}
+@media(min-width:700px){.cards{grid-template-columns:repeat(5,1fr)}.grid{grid-template-columns:repeat(3,1fr)}nav{justify-content:center}}
+</style>
+</head>
+<body>
+<header><h1>🏠 CRM PRO املاک چمستان</h1><p>مدیریت فایل، مشتری، پیگیری، معامله و کمیسیون — نسخه موبایل</p></header>
+<nav id="nav">
+<button class="active" data-page="home">داشبورد</button><button data-page="properties">فایل‌ها</button><button data-page="customers">مشتری‌ها</button><button data-page="tasks">پیگیری</button><button data-page="deals">معاملات</button><button data-page="reports">گزارش</button><button data-page="backup">پشتیبان</button>
+</nav>
+<main>
+
+<section id="home" class="page active">
+<div class="cards">
+<div class="card"><div class="muted">فایل فعال</div><div class="stat" id="sProps">0</div></div>
+<div class="card"><div class="muted">مشتری</div><div class="stat" id="sCust">0</div></div>
+<div class="card"><div class="muted">پیگیری باز</div><div class="stat" id="sTask">0</div></div>
+<div class="card"><div class="muted">معامله</div><div class="stat" id="sDeal">0</div></div>
+<div class="card"><div class="muted">کمیسیون</div><div class="stat" id="sComm">0</div></div>
+</div>
+<div class="card"><h2>📌 کارهای امروز</h2><div id="today"></div></div>
+<div class="card">
+<h2>🚀 شروع سریع</h2>
+<p>۱) از دکمه «ثبت فایل» یک ملک وارد کن. ۲) مشتری را ثبت کن. ۳) از «فایل‌ها» روی «مشتری مناسب» بزن. ۴) پیگیری‌ها را برای امروز ثبت کن. اطلاعات داخل همین مرورگر ذخیره می‌شود.</p>
+<div class="notice">اگر با فایل HTML در Files باز کردی و صفحه سفید بود، فایل را با Safari باز کن: روی فایل بزن → Share → Open in Safari. این نسخه برای استفاده در Safari طراحی شده است.</div>
+</div>
+<div class="card"><h2>⚡ دسترسی سریع</h2><div class="actions">
+<button class="btn primary" onclick="go('properties');setTimeout(()=>newProp(),50)">+ ثبت فایل</button>
+<button class="btn blue" onclick="go('customers');setTimeout(()=>newCust(),50)">+ ثبت مشتری</button>
+<button class="btn green" onclick="go('tasks');setTimeout(()=>newTask(),50)">+ پیگیری</button>
+</div></div>
+</section>
+
+<section id="properties" class="page">
+<div class="card"><div class="row"><h2>🏡 فایل‌ها</h2><button class="btn primary" onclick="newProp()">+ فایل جدید</button></div>
+<div class="grid"><div><label>جستجو</label><input id="pSearch" oninput="renderProps()" placeholder="نام، روستا، مالک، توضیح..."></div>
+<div><label>حداکثر قیمت</label><input id="pMax" type="number" oninput="renderProps()" placeholder="مثلاً 5000000000"></div>
+<div><label>نوع</label><select id="pType" onchange="renderProps()"><option value="">همه</option><option>ویلا</option><option>زمین</option><option>باغ</option><option>آپارتمان</option><option>سایر</option></select></div></div></div>
+<div id="propList"></div>
+<div class="card" id="propForm" style="display:none"><h2>ثبت/ویرایش فایل</h2><div class="grid">
+<div><label>عنوان فایل</label><input id="pf_title"></div><div><label>نوع</label><select id="pf_type"><option>ویلا</option><option>زمین</option><option>باغ</option><option>آپارتمان</option><option>سایر</option></select></div>
+<div><label>محدوده/روستا</label><input id="pf_area"></div><div><label>قیمت کل</label><input id="pf_price" type="number"></div>
+<div><label>متراژ زمین</label><input id="pf_land" type="number"></div><div><label>متراژ بنا</label><input id="pf_build" type="number"></div>
+<div><label>تعداد خواب</label><input id="pf_bed" type="number"></div><div><label>نوع سند</label><input id="pf_deed"></div>
+<div><label>مالک</label><input id="pf_owner"></div><div><label>شماره مالک</label><input id="pf_phone" type="tel"></div>
+<div class="full"><label>توضیحات</label><textarea id="pf_desc"></textarea></div>
+<div class="full"><label>عکس‌ها</label><input id="pf_photos" type="file" accept="image/*" multiple></div>
+</div><div class="actions"><button class="btn primary" onclick="saveProp()">ذخیره فایل</button><button class="btn gray" onclick="cancelForm('propForm')">انصراف</button></div></div>
+</section>
+
+<section id="customers" class="page">
+<div class="card"><div class="row"><h2>👤 مشتری‌ها</h2><button class="btn primary" onclick="newCust()">+ مشتری جدید</button></div>
+<div class="grid"><div class="full"><label>جستجوی مشتری</label><input id="cSearch" oninput="renderCust()" placeholder="نام یا شماره..."></div></div></div>
+<div id="custList"></div>
+<div class="card" id="custForm" style="display:none"><h2>ثبت/ویرایش مشتری</h2><div class="grid">
+<div><label>نام</label><input id="cf_name"></div><div><label>موبایل</label><input id="cf_phone" type="tel"></div>
+<div><label>بودجه</label><input id="cf_budget" type="number"></div><div><label>محدوده موردنظر</label><input id="cf_area"></div>
+<div><label>نوع ملک</label><select id="cf_type"><option>ویلا</option><option>زمین</option><option>باغ</option><option>آپارتمان</option><option>سایر</option></select></div>
+<div><label>اولویت</label><select id="cf_priority"><option>داغ 🔥</option><option>گرم</option><option>عادی</option></select></div>
+<div class="full"><label>نیازها/توضیحات</label><textarea id="cf_need"></textarea></div>
+</div><div class="actions"><button class="btn primary" onclick="saveCust()">ذخیره مشتری</button><button class="btn gray" onclick="cancelForm('custForm')">انصراف</button></div></div>
+</section>
+
+<section id="tasks" class="page">
+<div class="card"><div class="row"><h2>📞 پیگیری‌ها</h2><button class="btn primary" onclick="newTask()">+ پیگیری جدید</button></div></div>
+<div id="taskList"></div>
+<div class="card" id="taskForm" style="display:none"><h2>ثبت پیگیری</h2><div class="grid">
+<div><label>عنوان</label><input id="tf_title"></div><div><label>مشتری</label><select id="tf_customer"></select></div>
+<div><label>تاریخ</label><input id="tf_date" type="date"></div><div><label>ساعت</label><input id="tf_time" type="time"></div>
+<div class="full"><label>یادداشت</label><textarea id="tf_note"></textarea></div></div>
+<div class="actions"><button class="btn primary" onclick="saveTask()">ذخیره</button><button class="btn gray" onclick="cancelForm('taskForm')">انصراف</button></div></div>
+</section>
+
+<section id="deals" class="page">
+<div class="card"><div class="row"><h2>🤝 معاملات</h2><button class="btn primary" onclick="newDeal()">+ معامله جدید</button></div></div>
+<div id="dealList"></div>
+<div class="card" id="dealForm" style="display:none"><h2>ثبت معامله</h2><div class="grid">
+<div><label>عنوان معامله</label><input id="df_title"></div><div><label>مشتری</label><select id="df_customer"></select></div>
+<div><label>مبلغ معامله</label><input id="df_amount" type="number"></div><div><label>کمیسیون شما</label><input id="df_comm" type="number"></div>
+<div><label>تاریخ</label><input id="df_date" type="date"></div><div class="full"><label>یادداشت</label><textarea id="df_note"></textarea></div>
+</div><div class="actions"><button class="btn primary" onclick="saveDeal()">ذخیره</button><button class="btn gray" onclick="cancelForm('dealForm')">انصراف</button></div></div>
+</section>
+
+<section id="reports" class="page">
+<div class="card"><h2>📊 گزارش ماهانه</h2><div class="grid">
+<div><label>ماه</label><input id="repMonth" type="month" onchange="renderReports()"></div>
+</div><hr><div class="cards">
+<div class="card"><div class="muted">ارزش معاملات</div><div class="stat" id="rAmount">0</div></div>
+<div class="card"><div class="muted">کمیسیون</div><div class="stat" id="rComm">0</div></div>
+<div class="card"><div class="muted">تعداد معامله</div><div class="stat" id="rCount">0</div></div>
+</div></div>
+<div class="card"><h3>📋 جزئیات</h3><div id="repDetails"></div></div>
+</section>
+
+<section id="backup" class="page">
+<div class="card"><h2>💾 پشتیبان‌گیری</h2><p class="muted">اطلاعات این نسخه در همین مرورگر ذخیره می‌شود. برای جلوگیری از دست رفتن اطلاعات، مرتب خروجی بگیر.</p>
+<div class="actions"><button class="btn primary" onclick="backup()">دانلود پشتیبان JSON</button><label class="btn blue" style="display:inline-block;cursor:pointer">بازیابی<input type="file" accept=".json" onchange="restore(event)" style="display:none"></label><button class="btn red" onclick="clearAll()">حذف همه اطلاعات</button></div></div>
+<div class="card"><h3>نسخه</h3><p>CRM PRO املاک چمستان — نسخه 6</p><p class="muted">ساخته‌شده برای مدیریت فایل و مشتری در موبایل.</p></div>
+</section>
+
+</main>
+<script>
+const KEY='chamestan_crm_pro_v6';
+let db=JSON.parse(localStorage.getItem(KEY)||'{"properties":[],"customers":[],"tasks":[],"deals":[]}');
+let editId=null;
+const $=id=>document.getElementById(id);
+
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function money(n){return Number(n||0).toLocaleString('fa-IR')+' تومان'}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function go(page){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(page).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));renderAll()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function renderAll(){renderDash();renderProps();renderCust();renderTasks();renderDeals();renderReports()}
+function renderDash(){
+document.getElementById('sProps').textContent=db.properties.length;
+document.getElementById('sCust').textContent=db.customers.length;
+document.getElementById('sTask').textContent=db.tasks.filter(x=>!x.done).length;
+document.getElementById('sDeal').textContent=db.deals.length;
+document.getElementById('sComm').textContent=money(db.deals.reduce((a,x)=>a+Number(x.comm||0),0));
+let t=new Date().toISOString().slice(0,10), arr=db.tasks.filter(x=>x.date===t&&!x.done);
+document.getElementById('today').innerHTML=arr.length?arr.map(x=>`<div class="item"><b>${esc(x.title)}</b> — ${esc(x.time||'')}<br><span class="muted">${esc(x.note||'')}</span><button class="btn green" style="float:left" onclick="doneTask('${x.id}')">انجام شد</button></div>`).join(''):'<div class="empty">امروز پیگیری باز نداری.</div>'
+}
+function newProp(){editId=null;document.getElementById('propForm').style.display='block';document.getElementById('propForm').scrollIntoView({behavior:'smooth'});['$('pf_title')','$('pf_area')','$('pf_price')','$('pf_land')','$('pf_build')','$('pf_bed')','$('pf_deed')','$('pf_owner')','$('pf_phone')','$('pf_desc')'].forEach(x=>document.getElementById(x).value='');document.getElementById('pf_photos').value=''}
+function saveProp(){
+let p={id:editId||id(),title:$('pf_title').value,type:$('pf_type').value,area:$('pf_area').value,price:$('pf_price').value,land:$('pf_land').value,build:$('pf_build').value,bed:$('pf_bed').value,deed:$('pf_deed').value,owner:$('pf_owner').value,phone:$('pf_phone').value,desc:$('pf_desc').value,photos:editId?(db.properties.find(x=>x.id===editId)?.photos||[]):[]};
+let files=$('pf_photos').files; if(files.length){let ps=Array.from(files).map(f=>new Promise(r=>{let rd=new FileReader();rd.onload=()=>r(rd.result);rd.readAsDataURL(f)}));Promise.all(ps).then(a=>{p.photos=p.photos.concat(a);upProp(p)})}else upProp(p)
+}
+function upProp(p){let i=db.properties.findIndex(x=>x.id===p.id);if(i>=0)db.properties[i]=p;else db.properties.unshift(p);document.getElementById('propForm').style.display='none';saveDB()}
+function renderProps(){
+let q=($('pSearch')?.value||'').trim().toLowerCase(), max=Number($('pMax')?.value||0), type=$('pType')?.value||'';
+let a=db.properties.filter(p=>(!q||[p.title,p.area,p.owner,p.phone,p.desc].join(' ').toLowerCase().includes(q))&&(!max||Number(p.price)<=max)&&(!type||p.type===type));
+$('propList').innerHTML=a.length?a.map(p=>`<div class="item"><div class="row"><h3>${esc(p.title||'بدون عنوان')}</h3><span class="tag">${esc(p.type)}</span></div><div>${esc(p.area||'')} ${p.land?' | زمین '+esc(p.land)+' متر':''} ${p.build?' | بنا '+esc(p.build)+' متر':''}</div><div class="price">${money(p.price)}</div><div class="muted">مالک: ${esc(p.owner||'-')} | ${esc(p.phone||'-')}</div><p>${esc(p.desc||'')}</p>${p.photos?.length?'<div class="photos">'+p.photos.map(s=>`<img src="${s}">`).join('')+'</div>':''}<div class="actions"><button class="btn blue" onclick="matchProp('${p.id}')">🎯 مشتری مناسب</button><button class="btn gray" onclick="editProp('${p.id}')">ویرایش</button><button class="btn red" onclick="delProp('${p.id}')">حذف</button><button class="btn green" onclick="ad('${p.id}')">📢 متن آگهی</button></div></div>`).join(''):'<div class="card empty">هنوز فایلی ثبت نشده.</div>'
+}
+function editProp(i){let p=db.properties.find(x=>x.id===i);editId=i;$('propForm').style.display='block';Object.entries({'pf_title':p.title,$('pf_area'):p.area,$('pf_price'):p.price,$('pf_land'):p.land,$('pf_build'):p.build,$('pf_bed'):p.bed,$('pf_deed'):p.deed,$('pf_owner'):p.owner,$('pf_phone'):p.phone,$('pf_desc'):p.desc}).forEach(([k,v])=>document.getElementById(k).value=v||'');$('propForm').scrollIntoView({behavior:'smooth'})}
+function delProp(i){if(confirm('حذف شود؟')){db.properties=db.properties.filter(x=>x.id!==i);saveDB()}}
+function matchProp(i){let p=db.properties.find(x=>x.id===i), a=db.customers.filter(c=>(!c.budget||!p.price||Number(c.budget)>=Number(p.price))&&(!c.area||p.area?.includes(c.area)||c.area?.includes(p.area))&&(!c.type||c.type===p.type));alert(a.length?'مشتری‌های احتمالی:\\n\\n'+a.map(x=>x.name+' - '+x.phone).join('\\n'):'مشتری مطابق مشخصات پیدا نشد.')}
+function ad(i){let p=db.properties.find(x=>x.id===i);let txt=`🏡 ${p.title||'فروش ملک'}\\n📍 ${p.area||'چمستان'}\\n🏠 نوع: ${p.type||'-'}\\n📐 زمین: ${p.land||'-'} متر | بنا: ${p.build||'-'} متر\\n🛏 خواب: ${p.bed||'-'}\\n📜 سند: ${p.deed||'-'}\\n💰 قیمت: ${money(p.price)}\\n\\n${p.desc||''}\\n\\n📞 تماس: ${p.phone||'-'}`;navigator.clipboard?.writeText(txt);alert(txt+'\\n\\nمتن آگهی کپی شد.')}
+function newCust(){editId=null;$('custForm').style.display='block';['$('cf_name')','$('cf_phone')','$('cf_budget')','$('cf_area')','$('cf_need')'].forEach(x=>document.getElementById(x).value='');$('custForm').scrollIntoView({behavior:'smooth'})}
+function saveCust(){let c={id:editId||id(),name:$('cf_name').value,phone:$('cf_phone').value,budget:$('cf_budget').value,area:$('cf_area').value,type:$('cf_type').value,priority:$('cf_priority').value,need:$('cf_need').value};let i=db.customers.findIndex(x=>x.id===c.id);if(i>=0)db.customers[i]=c;else db.customers.unshift(c);$('custForm').style.display='none';saveDB()}
+function renderCust(){let q=($('cSearch')?.value||'').toLowerCase();let a=db.customers.filter(c=>(c.name+' '+c.phone).toLowerCase().includes(q));$('custList').innerHTML=a.length?a.map(c=>`<div class="item"><div class="row"><h3>${esc(c.name)}</h3><span class="tag">${esc(c.priority)}</span></div><div>📞 ${esc(c.phone)} | بودجه: ${money(c.budget)}</div><div>📍 ${esc(c.area)} | ${esc(c.type)}</div><p>${esc(c.need||'')}</p><div class="actions"><button class="btn green" onclick="call('${c.phone}')">📞 تماس</button><button class="btn blue" onclick="customerMatches('${c.id}')">🎯 فایل‌های مناسب</button><button class="btn gray" onclick="editCust('${c.id}')">ویرایش</button><button class="btn red" onclick="delCust('${c.id}')">حذف</button></div></div>`).join(''):'<div class="card empty">مشتری ثبت نشده.</div>'}
+function call(p){location.href='tel:'+p}
+function editCust(i){let c=db.customers.find(x=>x.id===i);editId=i;$('custForm').style.display='block';Object.entries({'cf_name':c.name,$('cf_phone'):c.phone,$('cf_budget'):c.budget,$('cf_area'):c.area,$('cf_need'):c.need}).forEach(([k,v])=>document.getElementById(k).value=v||'');$('cf_type').value=c.type||'ویلا';$('cf_priority').value=c.priority||'عادی';$('custForm').scrollIntoView({behavior:'smooth'})}
+function delCust(i){if(confirm('حذف مشتری؟')){db.customers=db.customers.filter(x=>x.id!==i);saveDB()}}
+function customerMatches(i){let c=db.customers.find(x=>x.id===i),a=db.properties.filter(p=>(!c.budget||!p.price||Number(p.price)<=Number(c.budget))&&(!c.area||p.area?.includes(c.area)||c.area?.includes(p.area))&&(!c.type||p.type===c.type));alert(a.length?'فایل‌های مناسب:\\n\\n'+a.map(p=>`${p.title} — ${money(p.price)}`).join('\\n'):'فایل مناسب پیدا نشد.')}
+function newTask(){editId=null;$('taskForm').style.display='block';$('tf_title').value='';$('tf_note').value='';$('tf_date').value=new Date().toISOString().slice(0,10);$('tf_time').value='';$('tf_customer').innerHTML=db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');$('taskForm').scrollIntoView({behavior:'smooth'})}
+function saveTask(){db.tasks.unshift({id:id(),title:$('tf_title').value,customer:$('tf_customer').value,date:$('tf_date').value,time:$('tf_time').value,note:$('tf_note').value,done:false});$('taskForm').style.display='none';saveDB()}
+function doneTask(i){let x=db.tasks.find(x=>x.id===i);if(x)x.done=true;saveDB()}
+function renderTasks(){$('taskList').innerHTML=db.tasks.length?db.tasks.map(x=>{let c=db.customers.find(c=>c.id===x.customer);return `<div class="item"><div class="row"><h3>${esc(x.title)}</h3><span class="tag">${x.done?'انجام شد':'باز'}</span></div><div>👤 ${esc(c?.name||'-')} | 📅 ${esc(x.date)} ${esc(x.time||'')}</div><p>${esc(x.note||'')}</p>${!x.done?`<button class="btn green" onclick="doneTask('${x.id}')">انجام شد</button>`:''}<button class="btn red" onclick="delTask('${x.id}')">حذف</button></div>`}).join(''):'<div class="card empty">پیگیری ثبت نشده.</div>'}
+function delTask(i){db.tasks=db.tasks.filter(x=>x.id!==i);saveDB()}
+function newDeal(){editId=null;$('dealForm').style.display='block';$('df_title').value='';$('df_amount').value='';$('df_comm').value='';$('df_note').value='';$('df_date').value=new Date().toISOString().slice(0,10);$('df_customer').innerHTML=db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');$('dealForm').scrollIntoView({behavior:'smooth'})}
+function saveDeal(){db.deals.unshift({id:id(),title:$('df_title').value,customer:$('df_customer').value,amount:$('df_amount').value,comm:$('df_comm').value,date:$('df_date').value,note:$('df_note').value});$('dealForm').style.display='none';saveDB()}
+function renderDeals(){$('dealList').innerHTML=db.deals.length?db.deals.map(x=>{let c=db.customers.find(c=>c.id===x.customer);return `<div class="item"><h3>${esc(x.title)}</h3><div>👤 ${esc(c?.name||'-')} | 📅 ${esc(x.date)}</div><div>💰 ${money(x.amount)} | 💵 کمیسیون: ${money(x.comm)}</div><p>${esc(x.note||'')}</p><button class="btn red" onclick="delDeal('${x.id}')">حذف</button></div>`}).join(''):'<div class="card empty">معامله‌ای ثبت نشده.</div>'}
+function delDeal(i){db.deals=db.deals.filter(x=>x.id!==i);saveDB()}
+function renderReports(){let m=$('repMonth')?.value||new Date().toISOString().slice(0,7);let a=db.deals.filter(x=>(x.date||'').startsWith(m));$('rAmount').textContent=money(a.reduce((s,x)=>s+Number(x.amount||0),0));$('rComm').textContent=money(a.reduce((s,x)=>s+Number(x.comm||0),0));$('rCount').textContent=a.length;$('repDetails').innerHTML=a.length?a.map(x=>`<div class="item">${esc(x.date)} — ${esc(x.title)} — ${money(x.amount)} — کمیسیون ${money(x.comm)}</div>`).join(''):'<div class="empty">برای این ماه معامله‌ای ثبت نشده.</div>'}
+function backup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-crm-chamestan-'+new Date().toISOString().slice(0,10)+'.json';a.click()}
+function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);saveDB();alert('بازیابی شد')}catch{alert('فایل پشتیبان معتبر نیست')}};r.readAsText(f)}
+function clearAll(){if(confirm('تمام اطلاعات حذف شود؟ این کار قابل برگشت نیست.')){db={properties:[],customers:[],tasks:[],deals:[]};saveDB()}}
+function cancelForm(x){document.getElementById(x).style.display='none'}
+renderAll();
+</script>
+</body></html>
